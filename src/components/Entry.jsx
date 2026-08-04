@@ -5,6 +5,7 @@ import Deck from './Deck.jsx'
 export default function Entry({ entry }) {
   const photos = entry.photos ?? []
   const slides = entry.deck?.slides ?? []
+  const links = entry.links ?? []
 
   const tabs = []
   if (photos.length) tabs.push('photos')
@@ -36,6 +37,18 @@ export default function Entry({ entry }) {
             <li key={item}>{item}</li>
           ))}
         </ul>
+
+        {links.length > 0 && (
+          <ul className="entry-links mono">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} target="_blank" rel="noreferrer">
+                  {link.label} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {tabs.length > 0 && (
           <div className="entry-media">
