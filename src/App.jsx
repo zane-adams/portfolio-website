@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import NameCanvas from './components/NameCanvas.jsx'
+import NavCanvas from './components/NavCanvas.jsx'
 import Entry from './components/Entry.jsx'
 import { profile, education, experience, projects, skills, resumeFile } from './content.js'
 
@@ -44,24 +45,38 @@ function Section({ id, label, children }) {
 }
 
 export default function App() {
+  const heroSlotRef = useRef(null)
+  const dockSlotRef = useRef(null)
+  const [nav3d, setNav3d] = useState(false)
+
   return (
     <>
       <nav className="nav mono">
         <a href="#top" className="nav-mark">
           {profile.name}
         </a>
-        <ul>
-          {NAV.map((item) => (
-            <li key={item.id}>
-              <a href={`#${item.id}`}>{item.label}</a>
-            </li>
-          ))}
-        </ul>
+        <div className="nav-dock" ref={dockSlotRef}>
+          <ul className={nav3d ? 'nav-links is-hidden' : 'nav-links'}>
+            {NAV.map((item) => (
+              <li key={item.id}>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
+
+      <NavCanvas
+        items={NAV}
+        heroSlotRef={heroSlotRef}
+        dockSlotRef={dockSlotRef}
+        onStatus={(status) => setNav3d(status === 'ready')}
+      />
 
       <main>
         <header className="hero" id="top">
           <NameCanvas text={profile.name} />
+          <div className="hero-nav" ref={heroSlotRef} aria-hidden="true" />
           <div className="hero-meta mono">
             <span>{profile.tagline}</span>
             <span>{profile.location}</span>
