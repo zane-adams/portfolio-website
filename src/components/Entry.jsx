@@ -3,7 +3,14 @@ import Gallery from './Gallery.jsx'
 import Deck from './Deck.jsx'
 
 export default function Entry({ entry }) {
-  const [tab, setTab] = useState(null) // null | 'photos' | 'deck'
+  const photos = entry.photos ?? []
+  const slides = entry.deck?.slides ?? []
+
+  const tabs = []
+  if (photos.length) tabs.push('photos')
+  if (slides.length) tabs.push('deck')
+
+  const [tab, setTab] = useState(tabs[0] ?? null)
 
   const toggle = (next) => setTab((current) => (current === next ? null : next))
 
@@ -30,35 +37,41 @@ export default function Entry({ entry }) {
           ))}
         </ul>
 
-        <div className="entry-media">
-          <div className="media-tabs mono">
-            <button
-              type="button"
-              className={tab === 'photos' ? 'is-active' : ''}
-              onClick={() => toggle('photos')}
-            >
-              photos{entry.photos.length ? ` (${entry.photos.length})` : ''}
-            </button>
-            <button
-              type="button"
-              className={tab === 'deck' ? 'is-active' : ''}
-              onClick={() => toggle('deck')}
-            >
-              slides{entry.deck?.slides?.length ? ` (${entry.deck.slides.length})` : ''}
-            </button>
-          </div>
+        {tabs.length > 0 && (
+          <div className="entry-media">
+            <div className="media-tabs mono">
+              {tabs.includes('photos') && (
+                <button
+                  type="button"
+                  className={tab === 'photos' ? 'is-active' : ''}
+                  onClick={() => toggle('photos')}
+                >
+                  photos ({photos.length})
+                </button>
+              )}
+              {tabs.includes('deck') && (
+                <button
+                  type="button"
+                  className={tab === 'deck' ? 'is-active' : ''}
+                  onClick={() => toggle('deck')}
+                >
+                  slides ({slides.length})
+                </button>
+              )}
+            </div>
 
-          {tab === 'photos' && (
-            <div className="media-panel">
-              <Gallery base={entry.id} photos={entry.photos} />
-            </div>
-          )}
-          {tab === 'deck' && (
-            <div className="media-panel">
-              <Deck base={entry.id} deck={entry.deck} />
-            </div>
-          )}
-        </div>
+            {tab === 'photos' && (
+              <div className="media-panel">
+                <Gallery base={entry.id} photos={photos} />
+              </div>
+            )}
+            {tab === 'deck' && (
+              <div className="media-panel">
+                <Deck base={entry.id} deck={entry.deck} />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )
