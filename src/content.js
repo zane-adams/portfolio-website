@@ -128,6 +128,8 @@ export const projects = [
       'implemented data entry forms, reports, secure login, and a real-time notification system.',
       'ran the weekly team meetings and delivered the final presentation.',
     ],
+    // optional — renders as a small link row under the tags
+    links: [{ label: 'github', href: 'https://github.com/zane-adams/ZooWeb' }],
     photos: [{ src: 'schema.png', caption: 'schema for our database, with mapped out relationships, cardinalities, entities, and attributes.' }],
     deck: { title: 'class presentation', slides: [] },
   },
