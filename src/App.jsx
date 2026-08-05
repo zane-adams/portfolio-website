@@ -3,6 +3,7 @@ import NameCanvas from './components/NameCanvas.jsx'
 import NavCanvas from './components/NavCanvas.jsx'
 import Entry from './components/Entry.jsx'
 import { profile, education, experience, projects, skills, resumeFile } from './content.js'
+import { Analytics } from "@vercel/analytics/next"
 
 const NAV = [
   { id: 'work', label: 'work' },
