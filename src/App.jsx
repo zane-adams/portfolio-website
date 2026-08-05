@@ -160,6 +160,7 @@ export default function App() {
           </ul>
         </div>
       </footer>
+      <Analytics />
     </>
   )
 }
