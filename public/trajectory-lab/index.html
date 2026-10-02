@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base href="/trajectory-lab/">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trajectory Lab</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<!--APP-START-->
+<div id="app">
+  <div id="viewport" aria-label="3D view of the solar system"></div>
+
+  <header class="topbar">
+    <h1>Trajectory Lab</h1>
+    <div class="view-tools">
+      <label for="scale-select">Scale
+        <select id="scale-select">
+          <option value="compressed">Compressed</option>
+          <option value="linear">True distance</option>
+        </select>
+      </label>
+      <label for="focus-select">Focus
+        <select id="focus-select"></select>
+      </label>
+      <label for="planet-size">Planet size
+        <input type="range" id="planet-size" min="0.4" max="2.5" step="0.1" value="1">
+      </label>
+      <label><input type="checkbox" id="toggle-labels" checked> Labels</label>
+      <label><input type="checkbox" id="toggle-orbits" checked> Orbits</label>
+      <label title="Calculate planet motion from gravity instead of orbit tables"><input type="checkbox" id="toggle-nbody"> N-body planets</label>
+    </div>
+    <div class="mobile-tabs">
+      <button type="button" id="tab-plan" class="on">Plan</button>
+      <button type="button" id="tab-mission">Mission</button>
+      <button type="button" id="tab-view">View</button>
+    </div>
+  </header>
+
+  <aside id="planner" class="panel panel-left" aria-label="Route planner">
+    <h2>Plan a route</h2>
+    <label class="field" for="target-select">Destination
+      <select id="target-select"></select>
+    </label>
+    <label class="field" for="window-select">Launch window
+      <select id="window-select">
+        <option value="0">Launch on current date</option>
+        <option value="0.5">Next 6 months</option>
+        <option value="1">Next 1 year</option>
+        <option value="2">Next 2 years</option>
+        <option value="3">Next 3 years</option>
+        <option value="6">Next 6 years</option>
+        <option value="12">Next 12 years</option>
+        <option value="15">Next 15 years</option>
+      </select>
+    </label>
+    <label class="field" for="maxdur">Max flight time (years)
+      <input type="number" id="maxdur" min="0.2" max="30" step="0.5" value="1.5">
+    </label>
+    <label class="field" for="objective-select">Optimize for
+      <select id="objective-select">
+        <option value="mindv">Lowest Δv</option>
+        <option value="balanced" selected>Balanced (Δv + time)</option>
+        <option value="earliest">Earliest arrival</option>
+      </select>
+    </label>
+    <label class="field" for="dv-budget" id="budget-field" hidden>Δv budget (km/s)
+      <input type="number" id="dv-budget" min="3" max="25" step="0.5" value="10">
+    </label>
+    <label class="field" for="arrival-select">At destination
+      <select id="arrival-select">
+        <option value="circular">Circular orbit</option>
+        <option value="capture">Elliptical capture</option>
+        <option value="flyby">Flyby only</option>
+      </select>
+    </label>
+    <label class="field" for="park-alt">Parking orbit altitude (km)
+      <input type="number" id="park-alt" min="160" max="2000" step="10" value="300">
+    </label>
+    <label class="check"><input type="checkbox" id="allow-assists" checked> Include gravity assists</label>
+    <button type="button" id="plan-btn" class="primary">Find route</button>
+    <p id="plan-status" class="muted"></p>
+    <div id="candidates"></div>
+  </aside>
+
+  <aside id="mission" class="panel panel-right" aria-label="Mission plan">
+    <div id="mission-empty">
+      <h2>Mission plan</h2>
+      <p class="muted">Choose a destination and click Find route.</p>
+    </div>
+    <div id="mission-body" hidden></div>
+  </aside>
+
+  <footer class="timebar">
+    <div class="time-row">
+      <span id="sim-date" class="sim-date">-</span>
+      <span id="mission-clock" class="muted"></span>
+    </div>
+    <div class="time-row">
+      <button type="button" id="btn-play">Pause</button>
+      <button type="button" id="btn-reverse">Reverse</button>
+      <label for="speed-select">Speed
+        <select id="speed-select"></select>
+      </label>
+      <button type="button" id="btn-launch">Go to launch</button>
+      <button type="button" id="btn-arrive">Go to arrival</button>
+      <button type="button" id="btn-today">Today</button>
+      <input type="date" id="date-input" aria-label="Set date">
+    </div>
+    <div class="scrub">
+      <div id="scrub-ticks" class="scrub-ticks"></div>
+      <input type="range" id="scrubber" min="0" max="1000" step="1" value="0" aria-label="Timeline">
+      <div class="scrub-ends"><span id="scrub-start"></span><span id="scrub-end"></span></div>
+    </div>
+  </footer>
+</div>
+<!--APP-END-->
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

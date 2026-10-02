@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/trajectory-lab", "destination": "/trajectory-lab/", "permanent": false }
+  ]
+}

@@ -12,7 +12,7 @@ export const profile = {
   // shown under the 3d name
   tagline: 'computer science + math @ university of houston',
   blurb:
-    'i build the whole path from raw data to something a person can actually click on, pipelines, models, and the interfaces that make them useful. right now i work on graph analytics for investigative research.',
+    'i build software that turns data and math into something people can use: machine learning models, analytics dashboards, internal tools, and interactive simulations. most of my work sits between data science and full-stack development.',
   location: 'houston, tx',
   email: '',
   links: [
@@ -41,7 +41,7 @@ export const experience = [
     role: 'data scientist / ai solutions architect intern',
     org: 'ninja analytics',
     place: 'leesburg, va',
-    dates: 'may 2026 — present',
+    dates: 'may 2026 - aug 2026',
     stack: ['python', 'postgresql', 'neo4j', 'fastapi', 'react', 'docker'],
     bullets: [
       'built an end-to-end analytics platform that gives researchers and investigators one dashboard to organize, query, and visualize relational and graph data.',
@@ -80,7 +80,7 @@ export const experience = [
     role: 'data management intern',
     org: 'great lakes dredge & dock',
     place: 'houston, tx',
-    dates: 'sep 2024 — jan 2026',
+    dates: 'sep 2024 - jan 2026',
     stack: ['c#', 'asp.net mvc', 'javascript', 'python', 'azure', 'power bi'],
     bullets: [
       'built an internal search site for the engineering team with active directory auth and azure-hosted file shares, deployed on iis.',
@@ -98,11 +98,32 @@ export const experience = [
 
 export const projects = [
   {
+    id: 'trajectory-lab',
+    role: 'trajectory lab: spaceflight & solar system simulator',
+    org: 'personal project',
+    place: '',
+    dates: 'jun 2026',
+    stack: ['javascript', 'three.js', 'webgl'],
+    bullets: [
+      'simulated planetary orbits and spacecraft transfers in the browser by numerically integrating gravitational forces.',
+      'built a route planner that searches direct and gravity-assist trajectories with a lambert solver and differential evolution, ranked by delta-v or arrival date.',
+      'animated the spacecraft along the chosen route with time controls, a mission timeline, and a launch-window porkchop plot.',
+      'checked each route in full n-body gravity and computed the correction burns needed to hit every flyby, plus a sandbox for adjusting burns.',
+    ],
+    links: [
+      { label: 'github', href: 'https://github.com/zane-adams/trajectory-lab' },
+      { label: 'live demo', href: '/trajectory-lab/' },
+    ],
+    // app files live in public/trajectory-lab/
+    photos: [],
+    deck: { title: '', slides: [] },
+  },
+  {
     id: 'covid-icu',
     role: 'covid-19 health data analysis',
     org: 'school project',
     place: '',
-    dates: 'sep 2025 — dec 2025',
+    dates: 'sep 2025 - dec 2025',
     stack: ['python', 'pandas', 'scikit-learn', 'xgboost', 'jupyter'],
     bullets: [
       'modeled icu patient demand from public health surveillance data with poisson, decision tree, random forest, and xgboost regressors.',
@@ -121,7 +142,7 @@ export const projects = [
     role: 'zoo database management system',
     org: 'school project',
     place: '',
-    dates: 'sep 2023 — dec 2023',
+    dates: 'sep 2023 - dec 2023',
     stack: ['c#', 'asp.net', 'sql', 'azure'],
     bullets: [
       'translated client requirements into a documented schema - entities, relationships, constraints, and user roles.',
