@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import Gallery from './Gallery.jsx'
 import Deck from './Deck.jsx'
+import Videos from './Videos.jsx'
+import LinkLabel from './LinkLabel.jsx'
 
 export default function Entry({ entry }) {
   const photos = entry.photos ?? []
   const slides = entry.deck?.slides ?? []
   const links = entry.links ?? []
+  const videos = entry.videos ?? []
 
   const tabs = []
+  if (videos.length) tabs.push('videos')
   if (photos.length) tabs.push('photos')
   if (slides.length) tabs.push('deck')
 
@@ -43,16 +47,32 @@ export default function Entry({ entry }) {
             {links.map((link) => (
               <li key={link.href}>
                 <a href={link.href} target="_blank" rel="noreferrer">
-                  {link.label} ↗
+                  <LinkLabel label={link.label} /> ↗
                 </a>
               </li>
             ))}
           </ul>
         )}
 
+        {entry.preview && (
+          <a className="entry-preview" href={entry.preview.href} target="_blank" rel="noreferrer">
+            <img src={`/media/${entry.id}/${entry.preview.src}`} alt={`${entry.role} screenshot`} loading="lazy" />
+            <span className="mono">{entry.preview.label} ↗</span>
+          </a>
+        )}
+
         {tabs.length > 0 && (
           <div className="entry-media">
             <div className="media-tabs mono">
+              {tabs.includes('videos') && (
+                <button
+                  type="button"
+                  className={tab === 'videos' ? 'is-active' : ''}
+                  onClick={() => toggle('videos')}
+                >
+                  videos ({videos.length})
+                </button>
+              )}
               {tabs.includes('photos') && (
                 <button
                   type="button"
@@ -73,6 +93,11 @@ export default function Entry({ entry }) {
               )}
             </div>
 
+            {tab === 'videos' && (
+              <div className="media-panel">
+                <Videos videos={videos} />
+              </div>
+            )}
             {tab === 'photos' && (
               <div className="media-panel">
                 <Gallery base={entry.id} photos={photos} />

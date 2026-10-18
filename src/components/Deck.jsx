@@ -1,10 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const pad = (n) => String(n).padStart(2, '0')
+const AUTOPLAY_MS = 5000
 
 export default function Deck({ base, deck }) {
   const slides = deck?.slides ?? []
   const [index, setIndex] = useState(0)
+  // pauses while the pointer or keyboard focus is on the deck
+  const [paused, setPaused] = useState(false)
+  // autoplay stops for good once the visitor navigates themselves
+  const [stopped, setStopped] = useState(false)
+
+  useEffect(() => {
+    if (slides.length < 2 || paused || stopped) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = setInterval(() => setIndex((i) => (i + 1) % slides.length), AUTOPLAY_MS)
+    return () => clearInterval(timer)
+  }, [slides.length, paused, stopped])
 
   if (!slides.length) {
     return (
@@ -16,13 +28,21 @@ export default function Deck({ base, deck }) {
     )
   }
 
-  const go = (step) => setIndex((i) => (i + step + slides.length) % slides.length)
+  const goTo = (i) => {
+    setStopped(true)
+    setIndex(i)
+  }
+  const go = (step) => goTo((index + step + slides.length) % slides.length)
   const slide = slides[index]
 
   return (
     <div
       className="deck"
       tabIndex={0}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
       onKeyDown={(e) => {
         if (e.key === 'ArrowRight') go(1)
         if (e.key === 'ArrowLeft') go(-1)
@@ -53,12 +73,18 @@ export default function Deck({ base, deck }) {
             <button
               type="button"
               className={i === index ? 'is-current' : ''}
-              onClick={() => setIndex(i)}
+              onClick={() => goTo(i)}
               tabIndex={-1}
             />
           </li>
         ))}
       </ol>
+
+      {deck.file && (
+        <a className="deck-download mono" href={`/media/${base}/${deck.file}`} download>
+          download slides ↓
+        </a>
+      )}
     </div>
   )
 }

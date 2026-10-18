@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import NameCanvas from './components/NameCanvas.jsx'
 import NavCanvas from './components/NavCanvas.jsx'
 import Entry from './components/Entry.jsx'
+import LinkLabel from './components/LinkLabel.jsx'
 import { profile, education, experience, projects, skills, resumeFile } from './content.js'
 import { Analytics } from "@vercel/analytics/react"
 
@@ -153,7 +154,7 @@ export default function App() {
             {profile.links.map((link) => (
               <li key={link.label}>
                 <a href={link.href} target="_blank" rel="noreferrer">
-                  {link.label}
+                  <LinkLabel label={link.label} />
                 </a>
               </li>
             ))}

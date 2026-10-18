@@ -98,11 +98,30 @@ export const experience = [
 
 export const projects = [
   {
+    id: 'asylum-zero',
+    role: 'asylum zero: ps1-inspired survival horror game',
+    org: 'school project',
+    place: '',
+    dates: 'aug 2026 - present',
+    stack: ['unity', 'c#', 'blender', 'github'],
+    bullets: [
+      'leading a team of 5 as producer and lead developer, managing scope, sprint planning, and task delegation across design, art, writing, and engineering.',
+      'developing core gameplay systems in c#, including a limited inventory, key-item progression, save rooms, and enemy ai such as a persistent stalker that hunts the player across the facility.',
+    ],
+    // youtube video ids (the part after watch?v=)
+    videos: [
+      { id: '1JKYjzji7lk', caption: '' },
+      { id: 'QGVOPCM_wfk', caption: '' },
+    ],
+    photos: [],
+    deck: { title: '', slides: [] },
+  },
+  {
     id: 'trajectory-lab',
     role: 'trajectory lab: spaceflight & solar system simulator',
     org: 'personal project',
     place: '',
-    dates: 'jun 2026',
+    dates: 'june 2026',
     stack: ['javascript', 'three.js', 'webgl'],
     bullets: [
       'simulated planetary orbits and spacecraft transfers in the browser by numerically integrating gravitational forces.',
@@ -112,9 +131,10 @@ export const projects = [
     ],
     links: [
       { label: 'github', href: 'https://github.com/zane-adams/trajectory-lab' },
-      { label: 'live demo', href: '/trajectory-lab/' },
     ],
     // app files live in public/trajectory-lab/
+    // screenshot in public/media/trajectory-lab/, links to the live demo
+    preview: { src: 'preview.jpg', href: '/trajectory-lab/', label: 'open live demo' },
     photos: [],
     deck: { title: '', slides: [] },
   },
@@ -132,11 +152,32 @@ export const projects = [
       'presented the findings and figures to peers and faculty.',
     ],
     photos: [],
-    deck: { 
-        title: 'covid-19 in the united states — patterns, predictions, and insights',
-        slides: [],
-          },
-        },
+    // file names inside public/media/covid-icu/deck/
+    deck: {
+      title: 'predicting icu demand and hospital strain',
+      // downloadable copy, in public/media/covid-icu/
+      file: 'covid_icu_project.pptx',
+      slides: [
+        { src: 'Slide1.PNG', caption: 'covid-19 health data analysis' },
+        { src: 'Slide2.PNG', caption: 'the question' },
+        { src: 'Slide3.PNG', caption: 'the data' },
+        { src: 'Slide4.PNG', caption: 'icu patients over time' },
+        { src: 'Slide5.PNG', caption: 'four prediction models' },
+        { src: 'Slide6.PNG', caption: 'what the models learn from' },
+        { src: 'Slide7.PNG', caption: 'under the hood' },
+        { src: 'Slide8.PNG', caption: 'how accurate were the models?' },
+        { src: 'Slide9.PNG', caption: 'predictions vs. reality' },
+        { src: 'Slide10.PNG', caption: 'what drives the forecast?' },
+        { src: 'Slide11.PNG', caption: 'sorting days by risk' },
+        { src: 'Slide12.PNG', caption: 'how well did risk sorting work?' },
+        { src: 'Slide13.PNG', caption: 'finding surges and strain' },
+        { src: 'Slide14.PNG', caption: 'biggest surge events' },
+        { src: 'Slide15.PNG', caption: 'key takeaways' },
+        { src: 'Slide16.PNG', caption: 'limitations and next steps' },
+        { src: 'Slide17.PNG', caption: 'thank you' },
+      ],
+    },
+  },
   {
     id: 'zoo-db',
     role: 'zoo database management system',
