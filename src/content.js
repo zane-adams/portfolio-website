@@ -103,7 +103,7 @@ export const projects = [
     org: 'school project',
     place: '',
     dates: 'aug 2026 - present',
-    stack: ['unity', 'c#', 'blender', 'github'],
+    stack: ['unity', 'c#', 'blender'],
     bullets: [
       'leading a team of 5 as producer and lead developer, managing scope, sprint planning, and task delegation across design, art, writing, and engineering.',
       'developing core gameplay systems in c#, including a limited inventory, key-item progression, save rooms, and enemy ai such as a persistent stalker that hunts the player across the facility.',
@@ -112,6 +112,7 @@ export const projects = [
     videos: [
       { id: '1JKYjzji7lk', caption: '' },
       { id: 'QGVOPCM_wfk', caption: '' },
+      { id: 'eYZFuedr_9M', caption: '' },
     ],
     photos: [],
     deck: { title: '', slides: [] },
